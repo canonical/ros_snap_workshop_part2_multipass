@@ -1,0 +1,54 @@
+#cloud-config
+
+ssh_pwauth: True
+password: "ubuntu"
+chpasswd: {expire: False}
+
+apt:
+  sources:
+    ros2:
+      source: "deb http://packages.ros.org/ros/ubuntu $RELEASE main"
+      keyid: C1CF 6E31 E6BA DE88 68B1 72B4 F42E D6FB AB17 C654
+package_upgrade: true
+packages:
+- build-essential
+- cmake
+- curl
+- git
+- lsb-release
+- openssh-client
+- openssh-server
+- python3
+- python3-pip
+- snapd
+- tig
+- unzip
+- vim
+- wget
+- zip
+# ROS specific packages
+- python3-catkin-tools
+- python3-rosdep
+- python3-rosinstall
+- python3-rosinstall-generator
+- python3-vcstool
+- ros-noetic-desktop-full
+- ros-noetic-turtlebot3-gazebo
+snap:
+  commands:
+  - snap install snapcraft --classic
+write_files:
+- content: |
+    if [ -f /opt/ros/noetic/setup.bash ]; then
+      source /opt/ros/noetic/setup.bash
+    fi
+  path: /home/ubuntu/.bashrc
+  append: true
+  defer: true
+runcmd:
+- |
+  # Initialise rosdep
+  rosdep init
+  sudo -u ubuntu sh -c "rosdep update --rosdistro noetic"
+final_message: "The ROS Noetic environment is up, after $UPTIME seconds."
+
