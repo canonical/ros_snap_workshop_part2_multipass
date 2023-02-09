@@ -13,7 +13,7 @@ then run the VM by calling:
 ```
 multipass launch --cpus 2 --disk 20G --cloud-init ./cloud-init.yaml 20.04 --name workshop-part2 --timeout 1000
 ```
-## Attache the VM
+## Attach the VM
 To attach a simple shell:
 ```
 multipass shell workshop-part2
