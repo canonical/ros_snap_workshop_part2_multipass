@@ -37,6 +37,8 @@ packages:
 snap:
   commands:
   - snap install snapcraft --classic
+  - snap install lxd
+  - snap set snapcraft provider=lxd
 write_files:
 - content: |
     if [ -f /opt/ros/noetic/setup.bash ]; then
@@ -50,5 +52,7 @@ runcmd:
   # Initialise rosdep
   rosdep init
   sudo -u ubuntu sh -c "rosdep update --rosdistro noetic"
+  # Init LXD
+  lxd init --auto
 final_message: "The ROS Noetic environment is up, after $UPTIME seconds."
 
