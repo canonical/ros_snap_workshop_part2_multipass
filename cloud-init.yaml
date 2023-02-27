@@ -34,6 +34,7 @@ packages:
 - python3-vcstool
 - ros-noetic-desktop-full
 - ros-noetic-turtlebot3-gazebo
+- ros-noetic-turtlebot3-slam
 snap:
   commands:
   - snap install snapcraft --classic
